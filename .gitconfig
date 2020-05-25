@@ -20,7 +20,7 @@
 	branches = branch -a
 	remotes = remote -v
 [core]
-	editor = nano
+	editor = vim
 	trustctime = false
 	untrackedCache = true
 [color]
