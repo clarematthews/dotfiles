@@ -25,26 +25,38 @@ setopt HIST_NO_STORE             # Don't store history commands
 export PATH=/usr/local/bin:$PATH # Prioritise brews
 export EDITOR="nano"
 
+# Shell completions
+autoload -Uz compinit && compinit -d "$HOME/.zcompdump" # Enable zsh completions
+
 # Personal settings
 PERSONAL="$ZDOTDIR/.personal"
 if [ -f "$PERSONAL" ];
 then
     source "$PERSONAL"
 else
-    echo "\nRecommendation: Create a personal file at $PERSONAL to contain personal settings. Example contents:"
+    echo "\nRecommendation: Create a personal file at $PERSONAL to contain any personal settings. Example contents:"
     echo ""
     echo "  git config --global user.name \"<github username>\""
     echo "  git config --global user.email \"<github email>\""
 fi
 
-# Pure prompt
-PURE="$HOME/zsh/pure"
-if [ -d "$PURE" ];
+ZPLUGINSDIR="$ZDOTDIR/.." # Directory where Git-based plugins should be cloned to
+
+# Autosuggestions
+AUTOSUGGESTIONS="$ZPLUGINSDIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [ -f "$AUTOSUGGESTIONS" ];
 then
-    fpath+="$PURE"
-    autoload -U promptinit; promptinit
-    prompt pure
-    zstyle :prompt:pure:path color yellow
+    export ZSH_AUTOSUGGEST_USE_ASYNC=true
+    source "$AUTOSUGGESTIONS"
 else
-    echo "\nRecommendation: Install Pure Prompt at $PURE"
+    echo "\nRecommendation: Install zsh-autosuggestions at $AUTOSUGGESTIONS"
+fi
+
+# Starship
+if [ -x "$(command -v starship)" ];
+then
+    export STARSHIP_CONFIG="$ZDOTDIR/starship.toml"
+    eval "$(starship init zsh)"
+else
+    echo "\nRecommendation: Install Starship"
 fi
