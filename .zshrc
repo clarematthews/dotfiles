@@ -52,18 +52,6 @@ else
     echo "\nRecommendation: Install zsh-autosuggestions at $AUTOSUGGESTIONS"
 fi
 
-# NVM
-ZSH_NVM="$ZPLUGINSDIR/zsh-nvm/zsh-nvm.plugin.zsh"
-if [ -f "$ZSH_NVM" ];
-then
-    export NVM_LAZY_LOAD=true
-    export NVM_DIR="$ZPLUGINSDIR/nvm"
-    export NVM_AUTO_USE=true
-    source "$ZSH_NVM"
-else
-    echo "\nRecommendation: Install zsh-nvm at $ZSH_NVM"
-fi
-
 # Starship
 if [ -x "$(command -v starship)" ];
 then
