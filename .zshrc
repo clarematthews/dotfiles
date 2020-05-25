@@ -2,7 +2,7 @@
 alias ls="ls -GlAhF"
 
 # Symlink gitconfig
-ln -sf "$HOME/Repos/dotfiles/.gitconfig" "$HOME/.gitconfig"
+ln -sf "$ZDOTDIR/.gitconfig" "$HOME/.gitconfig"
 
 # History
 export HISTFILE="$HOME/.zsh_history"
@@ -37,25 +37,14 @@ else
     echo "  git config --global user.email \"<github email>\""
 fi
 
-# NVM
-ZSH_NVM="$HOME/Repos/zsh-nvm/zsh-nvm.plugin.zsh"
-if [ -f "$ZSH_NVM" ];
-then
-    export NVM_LAZY_LOAD=true
-    export NVM_DIR="$HOME/Repos/nvm"
-    export NVM_AUTO_USE=true
-    source "$ZSH_NVM"
-else
-    echo "\nRecommendation: Install zsh-nvm at $ZSH_NVM"
-fi
-
 # Pure prompt
-PURE="$HOME/Repos/pure"
+PURE="$HOME/zsh/pure"
 if [ -d "$PURE" ];
 then
     fpath+="$PURE"
     autoload -U promptinit; promptinit
     prompt pure
+    zstyle :prompt:pure:path color yellow
 else
     echo "\nRecommendation: Install Pure Prompt at $PURE"
 fi
