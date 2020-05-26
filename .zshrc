@@ -1,5 +1,6 @@
 # Aliases
 alias ls="ls -GlAhF"
+alias jn="jupyter notebook"
 
 # Symlink gitconfig
 ln -sf "$ZDOTDIR/.gitconfig" "$HOME/.gitconfig"
@@ -22,7 +23,10 @@ setopt APPEND_HISTORY            # append to history file
 setopt HIST_NO_STORE             # Don't store history commands
 
 # Misc
-export PATH=/usr/local/bin:$PATH # Prioritise brews
+path=('/usr/local/bin' $path) # Prioritise brews
+path+=/Users/clare/Library/Python/3.7/bin
+path+=/Users/clare/Library/Python/2.7/bin
+export PATH
 export EDITOR="nano"
 
 # Shell completions
